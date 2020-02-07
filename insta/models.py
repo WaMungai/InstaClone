@@ -38,3 +38,14 @@ class Image(models.Model):
     
     def __str__(self):
         return self.image_name
+    
+    def save_image(self):
+        self.save()
+    
+    def delete_image(self):
+        self.delete()
+    
+    @classmethod
+    def get_images(cls):
+        image=cls.objects.all()
+        return image
