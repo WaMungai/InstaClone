@@ -7,9 +7,24 @@ class Profile(models.Model):
     '''
     Class containing user profile details
     '''
-    profie_photo=models.ImageField(upload_to='images/',blank=True)
+    
+    profile_photo=models.ImageField(upload_to='images/',blank=True)
     bio=models.CharField(max_length=100)
     editor=models.ForeignKey(User,on_delete=models.CASCADE)
+    
+    def __str__(self):
+        return self.bio
+    
+    def save_profile(self):
+        self.save()
+        
+    def delete_profile(self):
+        self.delete()
+        
+    @classmethod
+    def get_profile(cls):
+        profile=cls.objects.all()
+        return profile
 
 class Image(models.Model):
     image=models.ImageField(upload_to='images/',blank=True)
@@ -20,3 +35,6 @@ class Image(models.Model):
     likes=models.ManyToManyField(User,related_name="likes",blank=True)
     followers=models.ManyToManyField(User,related_name="followers",blank=True)
     pub_date=models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return self.image_name
