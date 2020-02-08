@@ -76,7 +76,7 @@ class Comments(models.Model):
         return comment
     
 class NewsLetterRecipients(models.Model):
-    name=models.CharField(max_field=30)
+    name=models.CharField(max_length=30)
     email=models.EmailField()
         
     
