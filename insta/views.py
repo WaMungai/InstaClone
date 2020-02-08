@@ -49,8 +49,16 @@ def single_photo(request,photo_id):
     comments=Comments.get_singlepost_comments(imageId)
     return render(request,'photo.html',{"form":form,"comments":comments,"photo":image_posted})
 
-# @login_required(login_url='/accounts/login')
-# def new_image(request):
-#     current_user =request.user
-#     if request.,ethod == 'POST':
-#         form = NewImageForm   
+@login_required(login_url='/accounts/login')
+def new_image(request):
+    current_user =request.user
+    if request.,ethod == 'POST':
+        form = NewImageForm(request.POST,request.FILES)
+        if form.is_valid():
+            image=form.save(commit=False)
+            image.editor=current_user
+            image.save()
+            return redirect('welcome')
+        else:
+            form =NewImageForm()
+            return render(request,'new_image.html',{"form":form})   
