@@ -55,3 +55,13 @@ class Image(models.Model):
         category_result=cls.objects.filter(image_name__icontains=category)
         return category_result
         
+class Comments(models.Model):
+    detail=HTMLField()
+    editor=models.ForeignKey(User,on_delete=models.CASCADE)
+    comment_date = models.DateTimeField(auto_now_add=True)
+    image_foreign=models.ForeignKey(Image,on_delete=models.CASCADE)
+    
+    def __str__(self):
+        return self.detail
+        
+    
