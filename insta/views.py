@@ -3,6 +3,7 @@ from django.http import HttpResponse,Http404,HttpResponseRedirect
 from .forms import NewsLetterForm
 from .models import Image,Profile,NewsLetterRecipients,Comments
 from .email import send_welcome_email
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def welcome(request):
@@ -30,5 +31,6 @@ def search_category(request):
         message="You haven't searched for any term"
         return render(request,'search.html',{"message":message})
 
-# def single_photo(request,photo_id):
+@login_required(login_url='accounts/login/')
+def single_photo(request,photo_id):
     
