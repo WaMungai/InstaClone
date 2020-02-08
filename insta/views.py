@@ -1,9 +1,16 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from .forms import NewsLetterForm
 
 # Create your views here.
 def welcome(request):
-    return render(request,'welcome.html')
+    if request.method == 'POST':
+        form=NewsLetterForm(request.POST)
+        if form.is_valid():
+            print('valid')
+    else:
+        form=NewsLetterForm()
+    return render(request,'welcome.html',"letterForm":form)
 
 def search_category(request):
     if 'category' in request.GET and request.GET["category"]:
