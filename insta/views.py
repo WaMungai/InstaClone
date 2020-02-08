@@ -33,4 +33,19 @@ def search_category(request):
 
 @login_required(login_url='accounts/login/')
 def single_photo(request,photo_id):
+    if request.method='POST':
+        form=NewCommentForm(request.POST)
+        if form.is_valid():
+            comment=form.save(commit=False)
+            comment.editor=request.user
+            post=Image.objects.get(id=photo_id)
+            comment.image_foreign=post
+            comment.save()
+            HttpResponseRedirect('single_photo')
+    else:
+        form=NewCommentForm()
+    image_posted=Image.single_image(photo_id)
+    imageId=Image.get_image_id(photo_id)
+    comments=Comments.get_singlepost_comments(imageId)
+     return render(request,'photo.html',{"form":form,"comments":comments,"photo":image_posted})
     
