@@ -48,4 +48,9 @@ def single_photo(request,photo_id):
     imageId=Image.get_image_id(photo_id)
     comments=Comments.get_singlepost_comments(imageId)
     return render(request,'photo.html',{"form":form,"comments":comments,"photo":image_posted})
-    
+
+# @login_required(login_url='/accounts/login')
+# def new_image(request):
+#     current_user =request.user
+#     if request.,ethod == 'POST':
+#         form = NewImageForm   
