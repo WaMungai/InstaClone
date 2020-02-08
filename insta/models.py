@@ -74,5 +74,9 @@ class Comments(models.Model):
     def get_comments(cls):
         comment=cls.objects.all()
         return comment
+    
+class NewsLetterRecipients(models.Model):
+    name=models.CharField(max_field=30)
+    email=models.EmailField()
         
     

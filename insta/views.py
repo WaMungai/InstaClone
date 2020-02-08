@@ -10,7 +10,7 @@ def welcome(request):
             print('valid')
     else:
         form=NewsLetterForm()
-    return render(request,'welcome.html',"letterForm":form)
+    return render(request,'welcome.html',{"letterForm":form})
 
 def search_category(request):
     if 'category' in request.GET and request.GET["category"]:
