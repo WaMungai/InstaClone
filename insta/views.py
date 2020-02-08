@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from django.http import HttpResponse
-from .forms import NewsLetterForm,
+from django.http import HttpResponse,Http404,HttpResponseRedirect
+from .forms import NewsLetterForm
 from .models import Image,Profile,NewsLetterRecipients,Comments
 
 # Create your views here.
