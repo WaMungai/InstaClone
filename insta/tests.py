@@ -1,5 +1,5 @@
 from django.test import TestCase
-from .models import Profile,Image
+from .models import Profile,Image,Comments
 from django.contrib.auth.models import User
 
 # Create your tests here.
@@ -52,3 +52,31 @@ class ImageTestClass(TestCase):
         self.images.save_image()
         secondimage=Image.get_images()
         self.assertTrue(secondimage is not None)
+        
+class CommentsTestClass(TestCase):
+    def setUp(self):
+        self.newuser=User(username='jayb')
+        self.newuser.save()
+        self.imageid=Image(id='1',image='img.jpg',image_name='cars',image_caption='fast cars',editor=self.newuser)
+        self.imageid.save()
+        self.newcomment=Comments(detail='thisisacomment',editor=self.newuser,image_foreign=self.imageid)
+        
+    def test_instance(self):
+        self.assertTrue(isinstance(self.newcomment,Comments))
+        
+    def test_save_comment(self):
+        self.newcomment.save_comment()
+        allcomments=Comments.objects.all()
+        self.assertTrue(len(allcomments)>0)
+        
+    def test_delete_commen(self):
+        self.newcomment.save_comment()
+        self.newcomment.delete_comment()
+        allcomments=Comments.objects.all()
+        self.assertTrue(len(allcomments)==0)
+        
+    def test_get_comment(self):
+        self.newcomment.save_comment()
+        commentone=Comments.get_comments()
+        self.assertTrue(commentone is not None)
+        
