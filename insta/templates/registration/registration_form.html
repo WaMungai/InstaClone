@@ -1,0 +1,74 @@
+{%extends "registration/base.html"%}
+{%load bootstrap3%}
+{%load static%}
+{{block.super}}
+{%block content%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <title>Login</title>
+    {{form.media}} -->
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+        <div class="container">
+            <div class="col-sm-6 col-md-6">
+                <ul>
+                    <li>
+                        <a class="btn btn-default" href="/accounts/login">Go back to login</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container h-100">
+        <div class="row h-100">
+            <div class="col-lg-7 my-auto">
+                <h1>Capture and show worlds moments</h1>
+            </div>
+        </div>
+        <div class="col-lg my-auto">
+            <div class="device-container">
+                {%if forms.errors%}
+                <p>Some informatio might be incorrect</p>
+                {%endif%}
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="text-center">Create Account</h3>
+                    </div>
+                    <div class="panel-body">
+                        <form action="/accounts/register/" method="post">
+                        {%csrf_token%}
+                        {%boostrap_form form%}
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-primary btn-sm" value="Sign Up" >
+                        </div>
+                        <input type="hidden" name="next" value="{{next}}">
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+    </div>
+    <footer>
+        <div class="container">
+            <p>&copy; InstaClone Website 2020. All Rights Reserved</p>
+            <ul class="list-inline">
+                <li class="list-inline-item">
+                <a href="#">Privacy</a>
+                </li>
+                <li class="list-inline-item">
+                    <a href="#">Terms</a>
+                </li>
+                <li class="list-inline-item">
+                    <a href="#">FAQ</a>
+                </li>
+            </ul>
+        </div>
+    </footer>
+    
+</body>
+</html>
