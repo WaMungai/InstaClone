@@ -33,7 +33,7 @@ def search_category(request):
 
 @login_required(login_url='accounts/login/')
 def single_photo(request,photo_id):
-    if request.method='POST':
+    if request.method =='POST':
         form=NewCommentForm(request.POST)
         if form.is_valid():
             comment=form.save(commit=False)
