@@ -47,5 +47,5 @@ def single_photo(request,photo_id):
     image_posted=Image.single_image(photo_id)
     imageId=Image.get_image_id(photo_id)
     comments=Comments.get_singlepost_comments(imageId)
-     return render(request,'photo.html',{"form":form,"comments":comments,"photo":image_posted})
+    return render(request,'photo.html',{"form":form,"comments":comments,"photo":image_posted})
     
