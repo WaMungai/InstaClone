@@ -1,0 +1,110 @@
+{% extends 'base.html'%}
+{% load bootstrap3 %}
+{%load static %}
+
+{% block content%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>New Profile</title>
+    {{form.media}}
+    {% block styles%}
+    {%bootstrap_css%}
+    <link rel="stylesheet" href="">
+    {%endblock%}
+</head>
+<body id="page-top">
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand js-scorller-trigger" href="{%url 'welcome'%}">Back to InstaClone</a>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">Menu <i class="fas fa-bars"></i></button>
+            <div class="col-sm-6 col-md-6">
+                {% if user.is_authenticated%}
+                <ul>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle btn btn-default" data-toggle="dropdown" role="button" aria-expanded="false">{{user.username}}Account <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>
+                                <a href="{%url 'welcome'%}">Home</a>
+                            </li>
+                            <li>
+                                <a href="{%url 'new-image'%}">Post Image</a>
+                            </li>
+                            <li>
+                                <a href="{%url 'new-profile%}'">Add Profile</a>
+                            </li>
+                            <li>
+                                <a href="/accounts/password/change">Change password</a>
+                            </li>
+                            <li>
+                                <a href="/logout">Logout</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                {%else%}
+                <ul>
+                    <li class="dropdown">
+                        <a href="#" class="dropdowm-toggle btn btn-deafult" data-toggle="dropdown" role="button" aria-expanded="false">Sign In <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>
+                                <a class="btn btn-default" href="/accounts/login">Login</a>
+                            </li>
+                            <li>
+                                <a class="btn btn-default" href="/accounts/register">Create Account</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                {%endif%}
+            </div>
+        </div>
+
+    </nav>
+    <header class="masthead">
+        <div class="container h-100">
+            <div class="row h-100">
+                <div class="col-lg-7 my-auto">
+                    <h1 class="mb-5">InstaClone<hr>Capture and share the worlds moments</h1>
+                    
+                </div> 
+            </div>
+            <div class="col-lg-5 my-auto">
+                <div class="device-container">
+                    {%if categories%}
+                    {%for categories in categories%}
+                    <h1>Caption:{{categories.image_caption}}</h1>
+                    <h2>Click photo to view more</h2>
+                    <a href="{%url 'photo' categories.id%}"><img src="{{categories.image.url}}" alt="image" style="height:300px;width:300px;"></a>
+                </div>
+                {%endfor%}
+                {%endif%}
+            </div>
+        </div>
+        <!-- <div class="button">
+
+        </div> -->
+    </header>
+    <footer>
+        <div class="container">
+            <p>&copy; InstaClone Website 2020.All rights reserved</p>
+            <ul class="list-inline">
+                <li class="list-inline-item">
+                    <a href="#">Privacy</a>
+                </li>
+                <li class="list-inline-item">
+                    <a href="#">Terms</a>
+                </li>
+                <li class="list-inline-item">
+                    <a href="#">FAQ</a>
+                </li>
+            </ul>
+        </div>
+    </footer>
+    
+</body>
+</html>
+{%endblock%}
