@@ -54,6 +54,22 @@ class Image(models.Model):
     def search_by_category(cls,category):
         category_result=cls.objects.filter(image_name__icontains=category)
         return category_result
+    
+    @classmethod
+    def get_image_id(cls,imageId):
+        image_id=cls.objects.filter(id=imageId)
+        return image_id
+    
+    @classmethod
+    def single_image(cls,image_id):
+        image_posted=cls.objects.filter(id-image_id)
+        return image_posted
+    
+    @classmethod
+    def user_images(cls,user_id):
+        images_posted=cls.objects.get(editor=user_id)
+        return image_posted
+        
         
 class Comments(models.Model):
     detail=HTMLField()
