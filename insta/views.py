@@ -61,4 +61,18 @@ def new_image(request):
             return redirect('welcome')
         else:
             form =NewImageForm()
-            return render(request,'new_image.html',{"form":form})   
+            return render(request,'new_image.html',{"form":form}) 
+        
+@login_required(login_url='/accounts/login/')
+def new_profile(request):
+    current_user = request.user
+    if request.method =='POST':
+        form = NewProfileForm(request.POST,request.FILES)
+        if form.is_valid():
+            profile =form.save(commit=False)
+            profile.editor =current_user
+            profile.save()
+            return redirect('welcome')
+    else:
+        form =NewProfileForm()
+    return render(request,'new_profile.html',{"form":form})  
