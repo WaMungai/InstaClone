@@ -94,6 +94,16 @@ def update_profile(request):
     }
     return render(request,'updateprofile.html',context)
 
+@login_required(login_url='/accounts/login/')
+def display_profile(request,user_id):
+    try:
+        single_profile=Profile.single_profile(user_id)
+        image_posted=Image.user_images(user_id)
+        return render(request,'profiledisplay.html',{"profile":single_profile,"image":image_posted})
+    except Profile.DoesNotExist:
+        messages.info(request,'The user has not yet a profile yet')
+        return redirect('welcome')
+
 def makecomment(request):
     current_user =request.user
     if request. moethod == 'POST':
