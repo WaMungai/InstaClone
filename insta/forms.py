@@ -28,3 +28,8 @@ class UpdateProfileForm(forms.ModelForm):
         widgets={
             'tags':forms.CheckboxSelectMultiple(),
         }
+    
+class NewCommentForm(forms.ModelForm):
+    class Meta:
+        model=Comments
+        editor=['editor']
