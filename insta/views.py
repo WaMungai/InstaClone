@@ -109,3 +109,8 @@ def like_a_post(request):
     post.likes.add(request.user)
     post.likes.add(request.user)
     return redrect('welcome')
+
+def follow(request):
+    post = get_object_or_404(Image,id=request.POST.get('post_id'))
+    post.followers.add(request.user)
+    return redirect('welcome')
