@@ -76,3 +76,18 @@ def new_profile(request):
     else:
         form =NewProfileForm()
     return render(request,'new_profile.html',{"form":form})  
+
+@login_required(login_url='/accounts/login/')
+def update_profile(request):
+    if request.method =='POST':
+        profileform=UpdateProfile(request.POST,request.FILES,instance=request.user)
+        if profileform.is_valid():
+            profileform.save()
+        return redirect('welcome')
+    else:
+        profileform=UpdateProfileForm(instance=request.user)
+    context={
+        'profileform':profileform,
+    }
+    return render(request,'updateprofile.html',context)
+        
