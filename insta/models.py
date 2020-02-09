@@ -101,6 +101,14 @@ class Comments(models.Model):
         comment=cls.objects.all()
         return comment
     
+    @classmethod
+    def get_singlepost_comments(cls,id):
+        comments=cls.objects.filter(image_foreign_in=id)
+        return comments
+    
+    
+    
+    
 class NewsLetterRecipients(models.Model):
     name=models.CharField(max_length=30)
     email=models.EmailField()
