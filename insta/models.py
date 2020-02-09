@@ -106,9 +106,6 @@ class Comments(models.Model):
         comments=cls.objects.filter(image_foreign_in=id)
         return comments
     
-    
-    
-    
 class NewsLetterRecipients(models.Model):
     name=models.CharField(max_length=30)
     email=models.EmailField()
