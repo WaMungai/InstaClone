@@ -1,9 +1,12 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect,get_object_or_404
 from django.http import HttpResponse,Http404,HttpResponseRedirect
-from .forms import NewsLetterForm
+from .forms import NewsLetterForm,NewImageForm,NewProfileForm,NewCommentForm,UpdateProfileForm
 from .models import Image,Profile,NewsLetterRecipients,Comments
 from .email import send_welcome_email
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+from django.core.exceptions import ObjectDoesNotExist
+from django.contrib import messages
 
 # Create your views here.
 def welcome(request):

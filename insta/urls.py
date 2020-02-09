@@ -13,6 +13,7 @@ urlpatterns=[
     url(r'^comment$'.views.makecomment,name='makecomment'),
     url('^like$', views.like_a_post,name='like_a_post'),
     url('^follow$',views.follow,name='follow'),
+    url('^delete/(?<post_id>\d+)$',views.delete_post,name='delete'),
 ]
 if settings.DEBUG:
     urlpatterns+= static(settings.MEDIA_URL,document_root =settings.MEDIA_ROOT)
