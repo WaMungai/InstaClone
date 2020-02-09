@@ -103,3 +103,9 @@ def makecomment(request):
     else:
         form=NewCommentForm()
     return render(request,'comment.html',{"form":form})
+
+def like_a_post(request):
+    post = get_object_or_404(Image,id=request.POST.get(post_id))
+    post.likes.add(request.user)
+    post.likes.add(request.user)
+    return redrect('welcome')
