@@ -14,6 +14,7 @@ urlpatterns=[
     url('^like$', views.like_a_post,name='like_a_post'),
     url('^follow$',views.follow,name='follow'),
     url('^delete/(?<post_id>\d+)$',views.delete_post,name='delete'),
+    url(r'^displayprofile/(?P<user_id>\d+)$',views.display_profile,name='displayprofile')
 ]
 if settings.DEBUG:
     urlpatterns+= static(settings.MEDIA_URL,document_root =settings.MEDIA_ROOT)
