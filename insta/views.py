@@ -90,4 +90,16 @@ def update_profile(request):
         'profileform':profileform,
     }
     return render(request,'updateprofile.html',context)
-        
+
+def makecomment(request):
+    current_user =request.user
+    if request. moethod == 'POST':
+        form =NewCommentForm(request.POST,request.FILES)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.editor =current_user
+            comment.save()
+        return redirect('welcome')
+    else:
+        form=NewCommentForm()
+    return render(request,'comment.html',{"form":form})
