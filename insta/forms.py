@@ -20,3 +20,11 @@ class NewProfileForm(forms.ModelForm):
         widget={
             'tags:'forms.CheckboxSelectMultiple(),
         }
+        
+class UpdateProfileForm(forms.ModelForm):
+    class Meta:
+        model=Profile
+        exclude=['editor']
+        widgets={
+            'tags':forms.CheckboxSelectMultiple(),
+        }
