@@ -117,3 +117,8 @@ def follow(request):
     post = get_object_or_404(Image,id=request.POST.get('post_id'))
     post.followers.add(request.user)
     return redirect('welcome')
+
+def delete_post(request,post_id=None):
+    post_to_delete=get_object_or_404(Image,id=('post_id'))
+    post.likes.add(request.user)
+    return redirect('welcome')
