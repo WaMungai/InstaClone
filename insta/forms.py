@@ -15,10 +15,10 @@ class NewImageForm(forms.ModelForm):
         
 class NewProfileForm(forms.ModelForm):
     class Meta:
-        model=Profile
-        exlude=['editor']
+        model = Profile
+        exclude  =['editor']
         widget={
-            'tags:'forms.CheckboxSelectMultiple(),
+            'tags':forms.CheckboxSelectMultiple(),
         }
         
 class UpdateProfileForm(forms.ModelForm):
@@ -32,4 +32,4 @@ class UpdateProfileForm(forms.ModelForm):
 class NewCommentForm(forms.ModelForm):
     class Meta:
         model=Comments
-        editor=['editor']
+        exclude=['editor']
