@@ -9,7 +9,18 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import messages
 
 # Create your views here.
+@login_required(login_url='/accounts/login/')
 def welcome(request):
+    everyoneimages=Image.get_images()
+    comment=Comments.get_comments()
+    users = User.objects.all()
+    logged_in_user =request.user
+    logged_in_user_posts= Image.objects.filter(editor=logged_in_user)
+    try:
+        profile=Profile.objects.get(editor=logged_in_user)
+    except Profile.DoesNotExist:
+        profile=None
+        
     if request.method == 'POST':
         form=NewsLetterForm(request.POST)
         if form.is_valid():
@@ -22,7 +33,7 @@ def welcome(request):
             print('valid')
     else:
         form=NewsLetterForm()
-    return render(request,'welcome.html',{"letterForm":form})
+    return render(request,'base.html',{ "everyone":everyoneimages,"images":logged_in_user_posts,"letterForm":form,"profile":profile,"comment":comment,"users":users})
 
 def search_category(request):
     if 'category' in request.GET and request.GET["category"]:
@@ -64,7 +75,7 @@ def new_image(request):
             return redirect('welcome')
         else:
             form =NewImageForm()
-            return render(request,'new_image.html',{"form":form}) 
+        return render(request,'new_image.html',{"form":form}) 
         
 @login_required(login_url='/accounts/login/')
 def new_profile(request):
