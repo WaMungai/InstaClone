@@ -58,6 +58,7 @@ def single_photo(request,photo_id):
             HttpResponseRedirect('single_photo')
     else:
         form=NewCommentForm()
+        
     image_posted=Image.single_image(photo_id)
     imageId=Image.get_image_id(photo_id)
     comments=Comments.get_singlepost_comments(imageId)
@@ -69,13 +70,14 @@ def new_image(request):
     if request.method == 'POST':
         form = NewImageForm(request.POST,request.FILES)
         if form.is_valid():
-            image=form.save(commit=False)
-            image.editor=current_user
+            image = form.save(commit=False)
+            image.editor = current_user
             image.save()
-            return redirect('welcome')
-        else:
-            form =NewImageForm()
-        return render(request,'new_image.html',{"form":form}) 
+        return redirect('welcome')
+    
+    else:
+        form =NewImageForm()
+    return render(request,'new_image.html',{"form":form}) 
         
 @login_required(login_url='/accounts/login/')
 def new_profile(request):
@@ -129,10 +131,10 @@ def makecomment(request):
     return render(request,'comment.html',{"form":form})
 
 def like_a_post(request):
-    post = get_object_or_404(Image,id=request.POST.get(post_id))
+    post = get_object_or_404(Image,id=request.POST.get('post_id'))
     post.likes.add(request.user)
-    post.likes.add(request.user)
-    return redrect('welcome')
+    # post.likes.add(request.user)
+    return redirect('welcome')
 
 def follow(request):
     post = get_object_or_404(Image,id=request.POST.get('post_id'))
@@ -140,6 +142,6 @@ def follow(request):
     return redirect('welcome')
 
 def delete_post(request,post_id=None):
-    post_to_delete=get_object_or_404(Image,id=('post_id'))
-    post.likes.add(request.user)
+    post_to_delete=get_object_or_404(Image,id=post_id)
+    post_to_delete.delete()
     return redirect('welcome')

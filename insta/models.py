@@ -72,7 +72,7 @@ class Image(models.Model):
     
     @classmethod
     def single_image(cls,image_id):
-        image_posted=cls.objects.filter(id-image_id)
+        image_posted=cls.objects.filter(id=image_id)
         return image_posted
     
     @classmethod
@@ -103,7 +103,7 @@ class Comments(models.Model):
     
     @classmethod
     def get_singlepost_comments(cls,id):
-        comments=cls.objects.filter(image_foreign_in=id)
+        comments=cls.objects.filter(image_foreign__in=id)
         return comments
     
 class NewsLetterRecipients(models.Model):
