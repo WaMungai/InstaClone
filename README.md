@@ -101,7 +101,7 @@ Phone:+254 795 587 5777
 
 ## MIT License
 
-Copyright (c) 2019 Joyce Mungai
+Copyright (c) 2020 Joyce Mungai
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
